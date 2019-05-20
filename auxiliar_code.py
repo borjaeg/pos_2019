@@ -1,5 +1,7 @@
 from keras.applications.inception_v3 import InceptionV3, decode_predictions
 from keras.applications.inception_v3 import preprocess_input
+from keras.applications.inception_resnet_v2 import InceptionResNetV2
+
 import matplotlib
 import tensorflow as tf
 import keras
@@ -22,15 +24,19 @@ def preprocess_image(im):
     
     return im
 
-def denormalise(im):
+def denormalise(im):    
     im/=2
     im+=0.5
     im*=255
     
     return im.astype(np.uint8)
 
-def load_neural_network():
-    nn = InceptionV3()
+def load_neural_network(mode):
+    if mode == "inception":
+        nn = InceptionV3()
+    elif mode == "inception_resnet":
+        nn = InceptionResNetV2()
+    
     return nn
 
 def plot_images_contrast(im_1, im_2):
