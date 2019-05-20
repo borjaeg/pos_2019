@@ -1,5 +1,6 @@
 from keras.applications.inception_v3 import InceptionV3, decode_predictions
 from keras.applications.inception_v3 import preprocess_input
+import matplotlib
 import tensorflow as tf
 import keras
 import cv2
@@ -32,7 +33,7 @@ def load_neural_network():
     nn = InceptionV3()
     return nn
 
-def plot_images(im_1, im_2):
+def plot_images_contrast(im_1, im_2):
     fig, axs = plt.subplots(1, 2, figsize=(12, 10))
 
     axs[0].set_title("Original Image")
@@ -42,9 +43,21 @@ def plot_images(im_1, im_2):
     axs[1].imshow(im_2)
     axs[1].axis("off")
     plt.show()
+
+def plot_images_noise(im_1, im_2):
+    fig, axs = plt.subplots(1, 3, figsize=(12, 10))
+
+    axs[0].set_title("Original Image")
+    axs[0].imshow(im_1)
+    axs[0].axis("off")
+    axs[1].set_title("Noise")
+    axs[1].imshow(im_1-im_2)
+    axs[1].axis("off")
+    axs[2].set_title("Hacked Image")
+    axs[2].imshow(im_2)
+    axs[2].axis("off")
+    plt.show()
     
 def predict(nn, image):
     pred = decode_predictions(nn.predict(preprocess_image(image)), top=1)[0][0][1]
     print(pred)
-
-%matplotlib inline
