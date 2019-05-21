@@ -1,6 +1,7 @@
 from keras.applications.inception_v3 import InceptionV3, decode_predictions
 from keras.applications.inception_v3 import preprocess_input
 from keras.applications.inception_resnet_v2 import InceptionResNetV2
+import imageio
 
 import matplotlib
 import tensorflow as tf
